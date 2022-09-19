@@ -1,0 +1,577 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ConsiderationItem {
+  id: ID!
+  item: Item!
+  recipient: String!
+  Listing: Listing
+  listingId: Int
+  itemId: Int!
+}
+
+type ItemCount {
+  ConsiderationItem: Int!
+}
+
+type Item {
+  id: ID!
+  itemType: String!
+  token: String!
+  identifierOrCriteria: String!
+  startAmount: Int!
+  endAmount: Int!
+  Listing: Listing
+  listingId: Int
+  ConsiderationItem: [ConsiderationItem!]
+  _count: ItemCount!
+}
+
+type ListingCount {
+  offer: Int!
+  consideration: Int!
+}
+
+type Listing {
+  id: ID!
+  offerer: String!
+  zone: String!
+  offer: [Item!]
+  consideration: [ConsiderationItem!]
+  orderType: String!
+  startTime: Int!
+  endTime: Int!
+  zoneHash: String!
+  salt: String!
+  conduitKey: String!
+  counter: Int!
+  _count: ListingCount!
+}
+
+type Query {
+  listings: [Listing!]!
+  listing(id: Int!): Listing!
+}
+
+type Mutation {
+  createListing(createListingInput: ListingCreateInput!): Listing!
+  updateListing(updateListingInput: UpdateOneListingInput!): Listing!
+  removeListing(id: Int!): Listing!
+}
+
+input ListingCreateInput {
+  offerer: String!
+  zone: String!
+  offer: ItemCreateNestedManyWithoutListingInput
+  consideration: ConsiderationItemCreateNestedManyWithoutListingInput
+  orderType: String!
+  startTime: Int!
+  endTime: Int!
+  zoneHash: String!
+  salt: String!
+  conduitKey: String!
+  counter: Int!
+}
+
+input ItemCreateNestedManyWithoutListingInput {
+  create: [ItemCreateWithoutListingInput!]
+  connectOrCreate: [ItemCreateOrConnectWithoutListingInput!]
+  createMany: ItemCreateManyListingInputEnvelope
+  connect: [ItemWhereUniqueInput!]
+}
+
+input ItemCreateWithoutListingInput {
+  itemType: String!
+  token: String!
+  identifierOrCriteria: String!
+  startAmount: Int!
+  endAmount: Int!
+  ConsiderationItem: ConsiderationItemCreateNestedManyWithoutItemInput
+}
+
+input ConsiderationItemCreateNestedManyWithoutItemInput {
+  create: [ConsiderationItemCreateWithoutItemInput!]
+  connectOrCreate: [ConsiderationItemCreateOrConnectWithoutItemInput!]
+  createMany: ConsiderationItemCreateManyItemInputEnvelope
+  connect: [ConsiderationItemWhereUniqueInput!]
+}
+
+input ConsiderationItemCreateWithoutItemInput {
+  recipient: String!
+  Listing: ListingCreateNestedOneWithoutConsiderationInput
+}
+
+input ListingCreateNestedOneWithoutConsiderationInput {
+  create: ListingCreateWithoutConsiderationInput
+  connectOrCreate: ListingCreateOrConnectWithoutConsiderationInput
+  connect: ListingWhereUniqueInput
+}
+
+input ListingCreateWithoutConsiderationInput {
+  offerer: String!
+  zone: String!
+  offer: ItemCreateNestedManyWithoutListingInput
+  orderType: String!
+  startTime: Int!
+  endTime: Int!
+  zoneHash: String!
+  salt: String!
+  conduitKey: String!
+  counter: Int!
+}
+
+input ListingCreateOrConnectWithoutConsiderationInput {
+  where: ListingWhereUniqueInput!
+  create: ListingCreateWithoutConsiderationInput!
+}
+
+input ListingWhereUniqueInput {
+  id: Int
+}
+
+input ConsiderationItemCreateOrConnectWithoutItemInput {
+  where: ConsiderationItemWhereUniqueInput!
+  create: ConsiderationItemCreateWithoutItemInput!
+}
+
+input ConsiderationItemWhereUniqueInput {
+  id: Int
+}
+
+input ConsiderationItemCreateManyItemInputEnvelope {
+  data: [ConsiderationItemCreateManyItemInput!]!
+  skipDuplicates: Boolean
+}
+
+input ConsiderationItemCreateManyItemInput {
+  id: Int
+  recipient: String!
+  listingId: Int
+}
+
+input ItemCreateOrConnectWithoutListingInput {
+  where: ItemWhereUniqueInput!
+  create: ItemCreateWithoutListingInput!
+}
+
+input ItemWhereUniqueInput {
+  id: Int
+}
+
+input ItemCreateManyListingInputEnvelope {
+  data: [ItemCreateManyListingInput!]!
+  skipDuplicates: Boolean
+}
+
+input ItemCreateManyListingInput {
+  id: Int
+  itemType: String!
+  token: String!
+  identifierOrCriteria: String!
+  startAmount: Int!
+  endAmount: Int!
+}
+
+input ConsiderationItemCreateNestedManyWithoutListingInput {
+  create: [ConsiderationItemCreateWithoutListingInput!]
+  connectOrCreate: [ConsiderationItemCreateOrConnectWithoutListingInput!]
+  createMany: ConsiderationItemCreateManyListingInputEnvelope
+  connect: [ConsiderationItemWhereUniqueInput!]
+}
+
+input ConsiderationItemCreateWithoutListingInput {
+  item: ItemCreateNestedOneWithoutConsiderationItemInput!
+  recipient: String!
+}
+
+input ItemCreateNestedOneWithoutConsiderationItemInput {
+  create: ItemCreateWithoutConsiderationItemInput
+  connectOrCreate: ItemCreateOrConnectWithoutConsiderationItemInput
+  connect: ItemWhereUniqueInput
+}
+
+input ItemCreateWithoutConsiderationItemInput {
+  itemType: String!
+  token: String!
+  identifierOrCriteria: String!
+  startAmount: Int!
+  endAmount: Int!
+  Listing: ListingCreateNestedOneWithoutOfferInput
+}
+
+input ListingCreateNestedOneWithoutOfferInput {
+  create: ListingCreateWithoutOfferInput
+  connectOrCreate: ListingCreateOrConnectWithoutOfferInput
+  connect: ListingWhereUniqueInput
+}
+
+input ListingCreateWithoutOfferInput {
+  offerer: String!
+  zone: String!
+  consideration: ConsiderationItemCreateNestedManyWithoutListingInput
+  orderType: String!
+  startTime: Int!
+  endTime: Int!
+  zoneHash: String!
+  salt: String!
+  conduitKey: String!
+  counter: Int!
+}
+
+input ListingCreateOrConnectWithoutOfferInput {
+  where: ListingWhereUniqueInput!
+  create: ListingCreateWithoutOfferInput!
+}
+
+input ItemCreateOrConnectWithoutConsiderationItemInput {
+  where: ItemWhereUniqueInput!
+  create: ItemCreateWithoutConsiderationItemInput!
+}
+
+input ConsiderationItemCreateOrConnectWithoutListingInput {
+  where: ConsiderationItemWhereUniqueInput!
+  create: ConsiderationItemCreateWithoutListingInput!
+}
+
+input ConsiderationItemCreateManyListingInputEnvelope {
+  data: [ConsiderationItemCreateManyListingInput!]!
+  skipDuplicates: Boolean
+}
+
+input ConsiderationItemCreateManyListingInput {
+  id: Int
+  recipient: String!
+  itemId: Int!
+}
+
+input UpdateOneListingInput {
+  data: ListingUpdateInput!
+  where: ListingWhereUniqueInput!
+}
+
+input ListingUpdateInput {
+  offerer: StringFieldUpdateOperationsInput
+  zone: StringFieldUpdateOperationsInput
+  offer: ItemUpdateManyWithoutListingNestedInput
+  consideration: ConsiderationItemUpdateManyWithoutListingNestedInput
+  orderType: StringFieldUpdateOperationsInput
+  startTime: IntFieldUpdateOperationsInput
+  endTime: IntFieldUpdateOperationsInput
+  zoneHash: StringFieldUpdateOperationsInput
+  salt: StringFieldUpdateOperationsInput
+  conduitKey: StringFieldUpdateOperationsInput
+  counter: IntFieldUpdateOperationsInput
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input ItemUpdateManyWithoutListingNestedInput {
+  create: [ItemCreateWithoutListingInput!]
+  connectOrCreate: [ItemCreateOrConnectWithoutListingInput!]
+  upsert: [ItemUpsertWithWhereUniqueWithoutListingInput!]
+  createMany: ItemCreateManyListingInputEnvelope
+  set: [ItemWhereUniqueInput!]
+  disconnect: [ItemWhereUniqueInput!]
+  delete: [ItemWhereUniqueInput!]
+  connect: [ItemWhereUniqueInput!]
+  update: [ItemUpdateWithWhereUniqueWithoutListingInput!]
+  updateMany: [ItemUpdateManyWithWhereWithoutListingInput!]
+  deleteMany: [ItemScalarWhereInput!]
+}
+
+input ItemUpsertWithWhereUniqueWithoutListingInput {
+  where: ItemWhereUniqueInput!
+  update: ItemUpdateWithoutListingInput!
+  create: ItemCreateWithoutListingInput!
+}
+
+input ItemUpdateWithoutListingInput {
+  itemType: StringFieldUpdateOperationsInput
+  token: StringFieldUpdateOperationsInput
+  identifierOrCriteria: StringFieldUpdateOperationsInput
+  startAmount: IntFieldUpdateOperationsInput
+  endAmount: IntFieldUpdateOperationsInput
+  ConsiderationItem: ConsiderationItemUpdateManyWithoutItemNestedInput
+}
+
+input IntFieldUpdateOperationsInput {
+  set: Int
+  increment: Int
+  decrement: Int
+  multiply: Int
+  divide: Int
+}
+
+input ConsiderationItemUpdateManyWithoutItemNestedInput {
+  create: [ConsiderationItemCreateWithoutItemInput!]
+  connectOrCreate: [ConsiderationItemCreateOrConnectWithoutItemInput!]
+  upsert: [ConsiderationItemUpsertWithWhereUniqueWithoutItemInput!]
+  createMany: ConsiderationItemCreateManyItemInputEnvelope
+  set: [ConsiderationItemWhereUniqueInput!]
+  disconnect: [ConsiderationItemWhereUniqueInput!]
+  delete: [ConsiderationItemWhereUniqueInput!]
+  connect: [ConsiderationItemWhereUniqueInput!]
+  update: [ConsiderationItemUpdateWithWhereUniqueWithoutItemInput!]
+  updateMany: [ConsiderationItemUpdateManyWithWhereWithoutItemInput!]
+  deleteMany: [ConsiderationItemScalarWhereInput!]
+}
+
+input ConsiderationItemUpsertWithWhereUniqueWithoutItemInput {
+  where: ConsiderationItemWhereUniqueInput!
+  update: ConsiderationItemUpdateWithoutItemInput!
+  create: ConsiderationItemCreateWithoutItemInput!
+}
+
+input ConsiderationItemUpdateWithoutItemInput {
+  recipient: StringFieldUpdateOperationsInput
+  Listing: ListingUpdateOneWithoutConsiderationNestedInput
+}
+
+input ListingUpdateOneWithoutConsiderationNestedInput {
+  create: ListingCreateWithoutConsiderationInput
+  connectOrCreate: ListingCreateOrConnectWithoutConsiderationInput
+  upsert: ListingUpsertWithoutConsiderationInput
+  disconnect: Boolean
+  delete: Boolean
+  connect: ListingWhereUniqueInput
+  update: ListingUpdateWithoutConsiderationInput
+}
+
+input ListingUpsertWithoutConsiderationInput {
+  update: ListingUpdateWithoutConsiderationInput!
+  create: ListingCreateWithoutConsiderationInput!
+}
+
+input ListingUpdateWithoutConsiderationInput {
+  offerer: StringFieldUpdateOperationsInput
+  zone: StringFieldUpdateOperationsInput
+  offer: ItemUpdateManyWithoutListingNestedInput
+  orderType: StringFieldUpdateOperationsInput
+  startTime: IntFieldUpdateOperationsInput
+  endTime: IntFieldUpdateOperationsInput
+  zoneHash: StringFieldUpdateOperationsInput
+  salt: StringFieldUpdateOperationsInput
+  conduitKey: StringFieldUpdateOperationsInput
+  counter: IntFieldUpdateOperationsInput
+}
+
+input ConsiderationItemUpdateWithWhereUniqueWithoutItemInput {
+  where: ConsiderationItemWhereUniqueInput!
+  data: ConsiderationItemUpdateWithoutItemInput!
+}
+
+input ConsiderationItemUpdateManyWithWhereWithoutItemInput {
+  where: ConsiderationItemScalarWhereInput!
+  data: ConsiderationItemUpdateManyMutationInput!
+}
+
+input ConsiderationItemScalarWhereInput {
+  AND: [ConsiderationItemScalarWhereInput!]
+  OR: [ConsiderationItemScalarWhereInput!]
+  NOT: [ConsiderationItemScalarWhereInput!]
+  id: IntFilter
+  recipient: StringFilter
+  listingId: IntNullableFilter
+  itemId: IntFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringFilter
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input ConsiderationItemUpdateManyMutationInput {
+  recipient: StringFieldUpdateOperationsInput
+}
+
+input ItemUpdateWithWhereUniqueWithoutListingInput {
+  where: ItemWhereUniqueInput!
+  data: ItemUpdateWithoutListingInput!
+}
+
+input ItemUpdateManyWithWhereWithoutListingInput {
+  where: ItemScalarWhereInput!
+  data: ItemUpdateManyMutationInput!
+}
+
+input ItemScalarWhereInput {
+  AND: [ItemScalarWhereInput!]
+  OR: [ItemScalarWhereInput!]
+  NOT: [ItemScalarWhereInput!]
+  id: IntFilter
+  itemType: StringFilter
+  token: StringFilter
+  identifierOrCriteria: StringFilter
+  startAmount: IntFilter
+  endAmount: IntFilter
+  listingId: IntNullableFilter
+}
+
+input ItemUpdateManyMutationInput {
+  itemType: StringFieldUpdateOperationsInput
+  token: StringFieldUpdateOperationsInput
+  identifierOrCriteria: StringFieldUpdateOperationsInput
+  startAmount: IntFieldUpdateOperationsInput
+  endAmount: IntFieldUpdateOperationsInput
+}
+
+input ConsiderationItemUpdateManyWithoutListingNestedInput {
+  create: [ConsiderationItemCreateWithoutListingInput!]
+  connectOrCreate: [ConsiderationItemCreateOrConnectWithoutListingInput!]
+  upsert: [ConsiderationItemUpsertWithWhereUniqueWithoutListingInput!]
+  createMany: ConsiderationItemCreateManyListingInputEnvelope
+  set: [ConsiderationItemWhereUniqueInput!]
+  disconnect: [ConsiderationItemWhereUniqueInput!]
+  delete: [ConsiderationItemWhereUniqueInput!]
+  connect: [ConsiderationItemWhereUniqueInput!]
+  update: [ConsiderationItemUpdateWithWhereUniqueWithoutListingInput!]
+  updateMany: [ConsiderationItemUpdateManyWithWhereWithoutListingInput!]
+  deleteMany: [ConsiderationItemScalarWhereInput!]
+}
+
+input ConsiderationItemUpsertWithWhereUniqueWithoutListingInput {
+  where: ConsiderationItemWhereUniqueInput!
+  update: ConsiderationItemUpdateWithoutListingInput!
+  create: ConsiderationItemCreateWithoutListingInput!
+}
+
+input ConsiderationItemUpdateWithoutListingInput {
+  item: ItemUpdateOneRequiredWithoutConsiderationItemNestedInput
+  recipient: StringFieldUpdateOperationsInput
+}
+
+input ItemUpdateOneRequiredWithoutConsiderationItemNestedInput {
+  create: ItemCreateWithoutConsiderationItemInput
+  connectOrCreate: ItemCreateOrConnectWithoutConsiderationItemInput
+  upsert: ItemUpsertWithoutConsiderationItemInput
+  connect: ItemWhereUniqueInput
+  update: ItemUpdateWithoutConsiderationItemInput
+}
+
+input ItemUpsertWithoutConsiderationItemInput {
+  update: ItemUpdateWithoutConsiderationItemInput!
+  create: ItemCreateWithoutConsiderationItemInput!
+}
+
+input ItemUpdateWithoutConsiderationItemInput {
+  itemType: StringFieldUpdateOperationsInput
+  token: StringFieldUpdateOperationsInput
+  identifierOrCriteria: StringFieldUpdateOperationsInput
+  startAmount: IntFieldUpdateOperationsInput
+  endAmount: IntFieldUpdateOperationsInput
+  Listing: ListingUpdateOneWithoutOfferNestedInput
+}
+
+input ListingUpdateOneWithoutOfferNestedInput {
+  create: ListingCreateWithoutOfferInput
+  connectOrCreate: ListingCreateOrConnectWithoutOfferInput
+  upsert: ListingUpsertWithoutOfferInput
+  disconnect: Boolean
+  delete: Boolean
+  connect: ListingWhereUniqueInput
+  update: ListingUpdateWithoutOfferInput
+}
+
+input ListingUpsertWithoutOfferInput {
+  update: ListingUpdateWithoutOfferInput!
+  create: ListingCreateWithoutOfferInput!
+}
+
+input ListingUpdateWithoutOfferInput {
+  offerer: StringFieldUpdateOperationsInput
+  zone: StringFieldUpdateOperationsInput
+  consideration: ConsiderationItemUpdateManyWithoutListingNestedInput
+  orderType: StringFieldUpdateOperationsInput
+  startTime: IntFieldUpdateOperationsInput
+  endTime: IntFieldUpdateOperationsInput
+  zoneHash: StringFieldUpdateOperationsInput
+  salt: StringFieldUpdateOperationsInput
+  conduitKey: StringFieldUpdateOperationsInput
+  counter: IntFieldUpdateOperationsInput
+}
+
+input ConsiderationItemUpdateWithWhereUniqueWithoutListingInput {
+  where: ConsiderationItemWhereUniqueInput!
+  data: ConsiderationItemUpdateWithoutListingInput!
+}
+
+input ConsiderationItemUpdateManyWithWhereWithoutListingInput {
+  where: ConsiderationItemScalarWhereInput!
+  data: ConsiderationItemUpdateManyMutationInput!
+}

@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator nestgraphql {
+  provider = "prisma-nestjs-graphql"
+  output   = "../src/@generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Listing {
+  id            Int                 @id @default(autoincrement())
+  offerer       String
+  zone          String
+  offer         Item[]
+  consideration ConsiderationItem[]
+  orderType     String
+  startTime     Int
+  endTime       Int
+  zoneHash      String
+  salt          String
+  conduitKey    String
+  counter       Int
+}
+
+model ConsiderationItem {
+  id Int @id @default(autoincrement())
+
+  item      Item     @relation(fields: [itemId], references: [id])
+  recipient String
+  Listing   Listing? @relation(fields: [listingId], references: [id])
+  listingId Int?
+  itemId    Int
+}
+
+model Item {
+  id Int @id @default(autoincrement())
+
+  itemType             String
+  token                String
+  identifierOrCriteria String
+  startAmount          Int
+  endAmount            Int
+  Listing              Listing?            @relation(fields: [listingId], references: [id])
+  listingId            Int?
+  ConsiderationItem    ConsiderationItem[]
+}
