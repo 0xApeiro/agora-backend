@@ -1,0 +1,34 @@
+org: cleanreptile
+console: true
+service: prisma-aws-lambda-agora
+
+package:
+  individually: true
+  include:
+    - src/**
+
+plugins:
+  - serverless-webpack
+  - serverless-webpack-prisma
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+    packager: 'npm' # Packager that will be used to package your external modules
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs16.x
+
+functions:
+  main:
+    handler: src/serverless.handler
+    timeout: 30
+    events:
+      - http:
+          method: ANY
+          path: graphql
+          cors: true
