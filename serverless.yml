@@ -10,6 +10,7 @@ package:
 plugins:
   - serverless-webpack
   - serverless-webpack-prisma
+  - serverless-dotenv-plugin
 
 custom:
   webpack:
