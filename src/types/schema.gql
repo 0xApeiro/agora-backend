@@ -20,8 +20,8 @@ type Item {
   itemType: Int!
   token: String!
   identifierOrCriteria: String!
-  startAmount: Int!
-  endAmount: Int!
+  startAmount: String!
+  endAmount: String!
   Listing: Listing
   listingId: Int
   ConsiderationItem: [ConsiderationItem!]
@@ -95,8 +95,8 @@ input ItemCreateWithoutListingInput {
   itemType: Int!
   token: String!
   identifierOrCriteria: String!
-  startAmount: Int!
-  endAmount: Int!
+  startAmount: String!
+  endAmount: String!
   ConsiderationItem: ConsiderationItemCreateNestedManyWithoutItemInput
 }
 
@@ -176,8 +176,8 @@ input ItemCreateManyListingInput {
   itemType: Int!
   token: String!
   identifierOrCriteria: String!
-  startAmount: Int!
-  endAmount: Int!
+  startAmount: String!
+  endAmount: String!
 }
 
 input ConsiderationItemCreateNestedManyWithoutListingInput {
@@ -202,8 +202,8 @@ input ItemCreateWithoutConsiderationItemInput {
   itemType: Int!
   token: String!
   identifierOrCriteria: String!
-  startAmount: Int!
-  endAmount: Int!
+  startAmount: String!
+  endAmount: String!
   Listing: ListingCreateNestedOneWithoutOfferInput
 }
 
@@ -301,8 +301,8 @@ input ItemUpdateWithoutListingInput {
   itemType: IntFieldUpdateOperationsInput
   token: StringFieldUpdateOperationsInput
   identifierOrCriteria: StringFieldUpdateOperationsInput
-  startAmount: IntFieldUpdateOperationsInput
-  endAmount: IntFieldUpdateOperationsInput
+  startAmount: StringFieldUpdateOperationsInput
+  endAmount: StringFieldUpdateOperationsInput
   ConsiderationItem: ConsiderationItemUpdateManyWithoutItemNestedInput
 }
 
@@ -488,8 +488,8 @@ input ItemScalarWhereInput {
   itemType: IntFilter
   token: StringFilter
   identifierOrCriteria: StringFilter
-  startAmount: IntFilter
-  endAmount: IntFilter
+  startAmount: StringFilter
+  endAmount: StringFilter
   listingId: IntNullableFilter
 }
 
@@ -497,8 +497,8 @@ input ItemUpdateManyMutationInput {
   itemType: IntFieldUpdateOperationsInput
   token: StringFieldUpdateOperationsInput
   identifierOrCriteria: StringFieldUpdateOperationsInput
-  startAmount: IntFieldUpdateOperationsInput
-  endAmount: IntFieldUpdateOperationsInput
+  startAmount: StringFieldUpdateOperationsInput
+  endAmount: StringFieldUpdateOperationsInput
 }
 
 input ConsiderationItemUpdateManyWithoutListingNestedInput {
@@ -543,8 +543,8 @@ input ItemUpdateWithoutConsiderationItemInput {
   itemType: IntFieldUpdateOperationsInput
   token: StringFieldUpdateOperationsInput
   identifierOrCriteria: StringFieldUpdateOperationsInput
-  startAmount: IntFieldUpdateOperationsInput
-  endAmount: IntFieldUpdateOperationsInput
+  startAmount: StringFieldUpdateOperationsInput
+  endAmount: StringFieldUpdateOperationsInput
   Listing: ListingUpdateOneWithoutOfferNestedInput
 }
 

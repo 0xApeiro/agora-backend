@@ -48,8 +48,8 @@ model Item {
   itemType             Int
   token                String
   identifierOrCriteria String
-  startAmount          Int
-  endAmount            Int
+  startAmount          String
+  endAmount            String
   Listing              Listing?            @relation(fields: [listingId], references: [id])
   listingId            Int?
   ConsiderationItem    ConsiderationItem[]
