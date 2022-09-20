@@ -39,13 +39,14 @@ type Listing {
   zone: String!
   offer: [Item!]
   consideration: [ConsiderationItem!]
-  orderType: String!
+  orderType: Int!
   startTime: String!
   endTime: String!
   zoneHash: String!
   salt: String!
   conduitKey: String!
   counter: Int!
+  signature: String!
   _count: ListingCount!
 }
 
@@ -65,13 +66,14 @@ input ListingCreateInput {
   zone: String!
   offer: ItemCreateNestedManyWithoutListingInput
   consideration: ConsiderationItemCreateNestedManyWithoutListingInput
-  orderType: String!
+  orderType: Int!
   startTime: String!
   endTime: String!
   zoneHash: String!
   salt: String!
   conduitKey: String!
   counter: Int!
+  signature: String!
 }
 
 input ItemCreateNestedManyWithoutListingInput {
@@ -112,13 +114,14 @@ input ListingCreateWithoutConsiderationInput {
   offerer: String!
   zone: String!
   offer: ItemCreateNestedManyWithoutListingInput
-  orderType: String!
+  orderType: Int!
   startTime: String!
   endTime: String!
   zoneHash: String!
   salt: String!
   conduitKey: String!
   counter: Int!
+  signature: String!
 }
 
 input ListingCreateOrConnectWithoutConsiderationInput {
@@ -210,13 +213,14 @@ input ListingCreateWithoutOfferInput {
   offerer: String!
   zone: String!
   consideration: ConsiderationItemCreateNestedManyWithoutListingInput
-  orderType: String!
+  orderType: Int!
   startTime: String!
   endTime: String!
   zoneHash: String!
   salt: String!
   conduitKey: String!
   counter: Int!
+  signature: String!
 }
 
 input ListingCreateOrConnectWithoutOfferInput {
@@ -255,13 +259,14 @@ input ListingUpdateInput {
   zone: StringFieldUpdateOperationsInput
   offer: ItemUpdateManyWithoutListingNestedInput
   consideration: ConsiderationItemUpdateManyWithoutListingNestedInput
-  orderType: StringFieldUpdateOperationsInput
+  orderType: IntFieldUpdateOperationsInput
   startTime: StringFieldUpdateOperationsInput
   endTime: StringFieldUpdateOperationsInput
   zoneHash: StringFieldUpdateOperationsInput
   salt: StringFieldUpdateOperationsInput
   conduitKey: StringFieldUpdateOperationsInput
   counter: IntFieldUpdateOperationsInput
+  signature: StringFieldUpdateOperationsInput
 }
 
 input StringFieldUpdateOperationsInput {
@@ -349,13 +354,14 @@ input ListingUpdateWithoutConsiderationInput {
   offerer: StringFieldUpdateOperationsInput
   zone: StringFieldUpdateOperationsInput
   offer: ItemUpdateManyWithoutListingNestedInput
-  orderType: StringFieldUpdateOperationsInput
+  orderType: IntFieldUpdateOperationsInput
   startTime: StringFieldUpdateOperationsInput
   endTime: StringFieldUpdateOperationsInput
   zoneHash: StringFieldUpdateOperationsInput
   salt: StringFieldUpdateOperationsInput
   conduitKey: StringFieldUpdateOperationsInput
   counter: IntFieldUpdateOperationsInput
+  signature: StringFieldUpdateOperationsInput
 }
 
 input ConsiderationItemUpdateWithWhereUniqueWithoutItemInput {
@@ -557,13 +563,14 @@ input ListingUpdateWithoutOfferInput {
   offerer: StringFieldUpdateOperationsInput
   zone: StringFieldUpdateOperationsInput
   consideration: ConsiderationItemUpdateManyWithoutListingNestedInput
-  orderType: StringFieldUpdateOperationsInput
+  orderType: IntFieldUpdateOperationsInput
   startTime: StringFieldUpdateOperationsInput
   endTime: StringFieldUpdateOperationsInput
   zoneHash: StringFieldUpdateOperationsInput
   salt: StringFieldUpdateOperationsInput
   conduitKey: StringFieldUpdateOperationsInput
   counter: IntFieldUpdateOperationsInput
+  signature: StringFieldUpdateOperationsInput
 }
 
 input ConsiderationItemUpdateWithWhereUniqueWithoutListingInput {

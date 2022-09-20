@@ -21,13 +21,14 @@ model Listing {
   zone          String
   offer         Item[]
   consideration ConsiderationItem[]
-  orderType     String
+  orderType     Int
   startTime     String
   endTime       String
   zoneHash      String
   salt          String
   conduitKey    String
   counter       Int
+  signature     String
 }
 
 model ConsiderationItem {
