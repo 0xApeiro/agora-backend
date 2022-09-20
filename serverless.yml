@@ -10,7 +10,6 @@ package:
 plugins:
   - serverless-webpack
   - serverless-webpack-prisma
-  - serverless-offline
 
 custom:
   webpack:
