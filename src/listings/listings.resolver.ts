@@ -1,8 +1,11 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { DeleteOneListingArgs } from '../@generated/listing/delete-one-listing.args';
 import { DeleteOneListingInput } from '../@generated/listing/delete-one-listing.input';
+import { FindUniqueListingArgs } from '../@generated/listing/find-unique-listing.args';
 import { FindUniqueListingInput } from '../@generated/listing/find-unique-listing.input';
 import { ListingCreateInput } from '../@generated/listing/listing-create.input';
 import { Listing } from '../@generated/listing/listing.model';
+import { UpdateOneListingArgs } from '../@generated/listing/update-one-listing.args';
 import { UpdateOneListingInput } from '../@generated/listing/update-one-listing.input';
 import { ListingsService } from './listings.service';
 
@@ -23,19 +26,17 @@ export class ListingsResolver {
   }
 
   @Query(() => Listing, { name: 'listing' })
-  findOne(@Args('id') findOneListingInput: FindUniqueListingInput) {
-    return this.listingsService.findOne(findOneListingInput);
+  findOne(@Args() id: FindUniqueListingArgs) {
+    return this.listingsService.findOne(id);
   }
 
   @Mutation(() => Listing)
-  updateListing(
-    @Args('updateListingInput') updateListingInput: UpdateOneListingInput,
-  ) {
-    return this.listingsService.update(updateListingInput);
+  updateListing(@Args() id: UpdateOneListingArgs) {
+    return this.listingsService.update(id);
   }
 
   @Mutation(() => Listing)
-  removeListing(@Args('id') removeInput: DeleteOneListingInput) {
-    return this.listingsService.remove(removeInput);
+  removeListing(@Args() id: DeleteOneListingArgs) {
+    return this.listingsService.remove(id);
   }
 }
