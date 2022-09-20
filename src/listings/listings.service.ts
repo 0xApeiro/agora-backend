@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { DeleteOneListingInput } from '../@generated/listing/delete-one-listing.input';
+import { FindUniqueListingInput } from '../@generated/listing/find-unique-listing.input';
 import { ListingCreateInput } from '../@generated/listing/listing-create.input';
 import { UpdateOneListingInput } from '../@generated/listing/update-one-listing.input';
 import { PrismaService } from '../prisma/prisma.service';
@@ -12,18 +14,18 @@ export class ListingsService {
   }
 
   findAll() {
-    return `This action returns all listings`;
+    return this.prisma.listing.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} listing`;
+  findOne(id: FindUniqueListingInput) {
+    return this.prisma.listing.findUnique(id);
   }
 
   update(updateListingInput: UpdateOneListingInput) {
     return this.prisma.listing.update(updateListingInput);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} listing`;
+  remove(id: DeleteOneListingInput) {
+    return this.prisma.listing.delete(id);
   }
 }

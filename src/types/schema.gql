@@ -52,13 +52,21 @@ type Listing {
 
 type Query {
   listings: [Listing!]!
-  listing(id: Int!): Listing!
+  listing(id: FindUniqueListingInput!): Listing!
+}
+
+input FindUniqueListingInput {
+  where: ListingWhereUniqueInput!
+}
+
+input ListingWhereUniqueInput {
+  id: Int
 }
 
 type Mutation {
   createListing(createListingInput: ListingCreateInput!): Listing!
   updateListing(updateListingInput: UpdateOneListingInput!): Listing!
-  removeListing(id: Int!): Listing!
+  removeListing(id: DeleteOneListingInput!): Listing!
 }
 
 input ListingCreateInput {
@@ -127,10 +135,6 @@ input ListingCreateWithoutConsiderationInput {
 input ListingCreateOrConnectWithoutConsiderationInput {
   where: ListingWhereUniqueInput!
   create: ListingCreateWithoutConsiderationInput!
-}
-
-input ListingWhereUniqueInput {
-  id: Int
 }
 
 input ConsiderationItemCreateOrConnectWithoutItemInput {
@@ -581,4 +585,8 @@ input ConsiderationItemUpdateWithWhereUniqueWithoutListingInput {
 input ConsiderationItemUpdateManyWithWhereWithoutListingInput {
   where: ConsiderationItemScalarWhereInput!
   data: ConsiderationItemUpdateManyMutationInput!
+}
+
+input DeleteOneListingInput {
+  where: ListingWhereUniqueInput!
 }

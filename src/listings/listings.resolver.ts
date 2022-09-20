@@ -1,4 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { DeleteOneListingInput } from '../@generated/listing/delete-one-listing.input';
+import { FindUniqueListingInput } from '../@generated/listing/find-unique-listing.input';
 import { ListingCreateInput } from '../@generated/listing/listing-create.input';
 import { Listing } from '../@generated/listing/listing.model';
 import { UpdateOneListingInput } from '../@generated/listing/update-one-listing.input';
@@ -21,8 +23,8 @@ export class ListingsResolver {
   }
 
   @Query(() => Listing, { name: 'listing' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.listingsService.findOne(id);
+  findOne(@Args('id') findOneListingInput: FindUniqueListingInput) {
+    return this.listingsService.findOne(findOneListingInput);
   }
 
   @Mutation(() => Listing)
@@ -33,7 +35,7 @@ export class ListingsResolver {
   }
 
   @Mutation(() => Listing)
-  removeListing(@Args('id', { type: () => Int }) id: number) {
-    return this.listingsService.remove(id);
+  removeListing(@Args('id') removeInput: DeleteOneListingInput) {
+    return this.listingsService.remove(removeInput);
   }
 }
