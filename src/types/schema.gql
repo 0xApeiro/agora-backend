@@ -17,7 +17,7 @@ type ItemCount {
 
 type Item {
   id: ID!
-  itemType: String!
+  itemType: Int!
   token: String!
   identifierOrCriteria: String!
   startAmount: Int!
@@ -40,8 +40,8 @@ type Listing {
   offer: [Item!]
   consideration: [ConsiderationItem!]
   orderType: String!
-  startTime: Int!
-  endTime: Int!
+  startTime: String!
+  endTime: String!
   zoneHash: String!
   salt: String!
   conduitKey: String!
@@ -66,8 +66,8 @@ input ListingCreateInput {
   offer: ItemCreateNestedManyWithoutListingInput
   consideration: ConsiderationItemCreateNestedManyWithoutListingInput
   orderType: String!
-  startTime: Int!
-  endTime: Int!
+  startTime: String!
+  endTime: String!
   zoneHash: String!
   salt: String!
   conduitKey: String!
@@ -82,7 +82,7 @@ input ItemCreateNestedManyWithoutListingInput {
 }
 
 input ItemCreateWithoutListingInput {
-  itemType: String!
+  itemType: Int!
   token: String!
   identifierOrCriteria: String!
   startAmount: Int!
@@ -113,8 +113,8 @@ input ListingCreateWithoutConsiderationInput {
   zone: String!
   offer: ItemCreateNestedManyWithoutListingInput
   orderType: String!
-  startTime: Int!
-  endTime: Int!
+  startTime: String!
+  endTime: String!
   zoneHash: String!
   salt: String!
   conduitKey: String!
@@ -166,7 +166,7 @@ input ItemCreateManyListingInputEnvelope {
 
 input ItemCreateManyListingInput {
   id: Int
-  itemType: String!
+  itemType: Int!
   token: String!
   identifierOrCriteria: String!
   startAmount: Int!
@@ -192,7 +192,7 @@ input ItemCreateNestedOneWithoutConsiderationItemInput {
 }
 
 input ItemCreateWithoutConsiderationItemInput {
-  itemType: String!
+  itemType: Int!
   token: String!
   identifierOrCriteria: String!
   startAmount: Int!
@@ -211,8 +211,8 @@ input ListingCreateWithoutOfferInput {
   zone: String!
   consideration: ConsiderationItemCreateNestedManyWithoutListingInput
   orderType: String!
-  startTime: Int!
-  endTime: Int!
+  startTime: String!
+  endTime: String!
   zoneHash: String!
   salt: String!
   conduitKey: String!
@@ -256,8 +256,8 @@ input ListingUpdateInput {
   offer: ItemUpdateManyWithoutListingNestedInput
   consideration: ConsiderationItemUpdateManyWithoutListingNestedInput
   orderType: StringFieldUpdateOperationsInput
-  startTime: IntFieldUpdateOperationsInput
-  endTime: IntFieldUpdateOperationsInput
+  startTime: StringFieldUpdateOperationsInput
+  endTime: StringFieldUpdateOperationsInput
   zoneHash: StringFieldUpdateOperationsInput
   salt: StringFieldUpdateOperationsInput
   conduitKey: StringFieldUpdateOperationsInput
@@ -289,7 +289,7 @@ input ItemUpsertWithWhereUniqueWithoutListingInput {
 }
 
 input ItemUpdateWithoutListingInput {
-  itemType: StringFieldUpdateOperationsInput
+  itemType: IntFieldUpdateOperationsInput
   token: StringFieldUpdateOperationsInput
   identifierOrCriteria: StringFieldUpdateOperationsInput
   startAmount: IntFieldUpdateOperationsInput
@@ -350,8 +350,8 @@ input ListingUpdateWithoutConsiderationInput {
   zone: StringFieldUpdateOperationsInput
   offer: ItemUpdateManyWithoutListingNestedInput
   orderType: StringFieldUpdateOperationsInput
-  startTime: IntFieldUpdateOperationsInput
-  endTime: IntFieldUpdateOperationsInput
+  startTime: StringFieldUpdateOperationsInput
+  endTime: StringFieldUpdateOperationsInput
   zoneHash: StringFieldUpdateOperationsInput
   salt: StringFieldUpdateOperationsInput
   conduitKey: StringFieldUpdateOperationsInput
@@ -475,7 +475,7 @@ input ItemScalarWhereInput {
   OR: [ItemScalarWhereInput!]
   NOT: [ItemScalarWhereInput!]
   id: IntFilter
-  itemType: StringFilter
+  itemType: IntFilter
   token: StringFilter
   identifierOrCriteria: StringFilter
   startAmount: IntFilter
@@ -484,7 +484,7 @@ input ItemScalarWhereInput {
 }
 
 input ItemUpdateManyMutationInput {
-  itemType: StringFieldUpdateOperationsInput
+  itemType: IntFieldUpdateOperationsInput
   token: StringFieldUpdateOperationsInput
   identifierOrCriteria: StringFieldUpdateOperationsInput
   startAmount: IntFieldUpdateOperationsInput
@@ -530,7 +530,7 @@ input ItemUpsertWithoutConsiderationItemInput {
 }
 
 input ItemUpdateWithoutConsiderationItemInput {
-  itemType: StringFieldUpdateOperationsInput
+  itemType: IntFieldUpdateOperationsInput
   token: StringFieldUpdateOperationsInput
   identifierOrCriteria: StringFieldUpdateOperationsInput
   startAmount: IntFieldUpdateOperationsInput
@@ -558,8 +558,8 @@ input ListingUpdateWithoutOfferInput {
   zone: StringFieldUpdateOperationsInput
   consideration: ConsiderationItemUpdateManyWithoutListingNestedInput
   orderType: StringFieldUpdateOperationsInput
-  startTime: IntFieldUpdateOperationsInput
-  endTime: IntFieldUpdateOperationsInput
+  startTime: StringFieldUpdateOperationsInput
+  endTime: StringFieldUpdateOperationsInput
   zoneHash: StringFieldUpdateOperationsInput
   salt: StringFieldUpdateOperationsInput
   conduitKey: StringFieldUpdateOperationsInput

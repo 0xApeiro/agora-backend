@@ -22,8 +22,8 @@ model Listing {
   offer         Item[]
   consideration ConsiderationItem[]
   orderType     String
-  startTime     Int
-  endTime       Int
+  startTime     String
+  endTime       String
   zoneHash      String
   salt          String
   conduitKey    String
@@ -43,7 +43,7 @@ model ConsiderationItem {
 model Item {
   id Int @id @default(autoincrement())
 
-  itemType             String
+  itemType             Int
   token                String
   identifierOrCriteria String
   startAmount          Int
@@ -52,3 +52,12 @@ model Item {
   listingId            Int?
   ConsiderationItem    ConsiderationItem[]
 }
+
+// enum ItemType {
+//   NATIVE
+//   ERC20
+//   ERC721
+//   ERC1155
+//   ERC721_WITH_CRITERIA
+//   ERC1155_WITH_CRITERIA
+// }
