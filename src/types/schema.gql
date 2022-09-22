@@ -160,6 +160,12 @@ input ItemCreateOrConnectWithoutListingInput {
 
 input ItemWhereUniqueInput {
   id: Int
+  token_identifierOrCriteria: ItemTokenIdentifierOrCriteriaCompoundUniqueInput
+}
+
+input ItemTokenIdentifierOrCriteriaCompoundUniqueInput {
+  token: String!
+  identifierOrCriteria: String!
 }
 
 input ItemCreateManyListingInputEnvelope {

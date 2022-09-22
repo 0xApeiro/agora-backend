@@ -53,6 +53,8 @@ model Item {
   Listing              Listing?            @relation(fields: [listingId], references: [id])
   listingId            Int?
   ConsiderationItem    ConsiderationItem[]
+
+  @@unique([token, identifierOrCriteria])
 }
 
 // enum ItemType {
