@@ -6,7 +6,6 @@ import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLISODateTime } from '@nestjs/graphql';
 import { join } from 'path';
-import { ListingsModule } from './listings/listings.module';
 import { PrismaService } from './prisma/prisma.service';
 import { ListingModule } from './listing/listing.module';
 
@@ -16,14 +15,13 @@ import { ListingModule } from './listing/listing.module';
       driver: ApolloDriver,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      // autoSchemaFile: join(process.cwd(), 'src/types/schema.gql'),
-      typePaths: ['./**/*.gql'],
+      autoSchemaFile: join(process.cwd(), 'src/types/schema.gql'),
+      // typePaths: ['./**/*.gql'],
       // resolvers: { DateTime: GraphQLISODateTime },
     }),
-    ListingsModule,
     ListingModule,
   ],
   controllers: [AppController],
-  providers: [AppService, PrismaService],
+  providers: [AppService],
 })
 export class AppModule {}
