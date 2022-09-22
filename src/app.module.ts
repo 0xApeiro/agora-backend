@@ -8,6 +8,7 @@ import { GraphQLISODateTime } from '@nestjs/graphql';
 import { join } from 'path';
 import { ListingsModule } from './listings/listings.module';
 import { PrismaService } from './prisma/prisma.service';
+import { ListingModule } from './listing/listing.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { PrismaService } from './prisma/prisma.service';
       // resolvers: { DateTime: GraphQLISODateTime },
     }),
     ListingsModule,
+    ListingModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
