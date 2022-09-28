@@ -28,20 +28,21 @@ model UniqueItem {
 }
 
 model Listing {
-  id            Int                 @id @default(autoincrement())
-  offerer       String
-  zone          String
-  offer         Item[]
-  consideration ConsiderationItem[]
-  orderType     OrderType
-  startTime     String
-  endTime       String
-  zoneHash      String
-  salt          String
-  conduitKey    String
-  counter       Int
-  signature     String
-  UniqueItem    UniqueItem[]
+  id                              Int                 @id @default(autoincrement())
+  offerer                         String
+  zone                            String
+  offer                           Item[]
+  consideration                   ConsiderationItem[]
+  orderType                       OrderType
+  startTime                       String
+  endTime                         String
+  zoneHash                        String
+  salt                            String
+  conduitKey                      String
+  counter                         Int
+  signature                       String
+  totalOriginalConsiderationItems Int
+  UniqueItem                      UniqueItem[]
 }
 
 model ConsiderationItem {

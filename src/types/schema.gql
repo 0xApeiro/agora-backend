@@ -65,6 +65,7 @@ type Listing {
   conduitKey: String!
   counter: Int!
   signature: String!
+  totalOriginalConsiderationItems: Int!
   UniqueItem: [UniqueItem!]
   _count: ListingCount!
 }
@@ -110,6 +111,7 @@ input ListingCreateInput {
   conduitKey: String!
   counter: Int!
   signature: String!
+  totalOriginalConsiderationItems: Int!
   UniqueItem: UniqueItemCreateNestedManyWithoutListingInput
 }
 
@@ -159,6 +161,7 @@ input ListingCreateWithoutConsiderationInput {
   conduitKey: String!
   counter: Int!
   signature: String!
+  totalOriginalConsiderationItems: Int!
   UniqueItem: UniqueItemCreateNestedManyWithoutListingInput
 }
 
@@ -289,6 +292,7 @@ input ListingCreateWithoutOfferInput {
   conduitKey: String!
   counter: Int!
   signature: String!
+  totalOriginalConsiderationItems: Int!
   UniqueItem: UniqueItemCreateNestedManyWithoutListingInput
 }
 
@@ -331,6 +335,7 @@ input ListingUpdateInput {
   conduitKey: StringFieldUpdateOperationsInput
   counter: IntFieldUpdateOperationsInput
   signature: StringFieldUpdateOperationsInput
+  totalOriginalConsiderationItems: IntFieldUpdateOperationsInput
   UniqueItem: UniqueItemUpdateManyWithoutListingNestedInput
 }
 
@@ -423,6 +428,7 @@ input ListingUpdateWithoutConsiderationInput {
   conduitKey: StringFieldUpdateOperationsInput
   counter: IntFieldUpdateOperationsInput
   signature: StringFieldUpdateOperationsInput
+  totalOriginalConsiderationItems: IntFieldUpdateOperationsInput
   UniqueItem: UniqueItemUpdateManyWithoutListingNestedInput
 }
 
@@ -709,6 +715,7 @@ input ListingUpdateWithoutOfferInput {
   conduitKey: StringFieldUpdateOperationsInput
   counter: IntFieldUpdateOperationsInput
   signature: StringFieldUpdateOperationsInput
+  totalOriginalConsiderationItems: IntFieldUpdateOperationsInput
   UniqueItem: UniqueItemUpdateManyWithoutListingNestedInput
 }
 
@@ -747,6 +754,7 @@ input ListingCreateWithoutUniqueItemInput {
   conduitKey: String!
   counter: Int!
   signature: String!
+  totalOriginalConsiderationItems: Int!
 }
 
 input ListingCreateOrConnectWithoutUniqueItemInput {
@@ -786,4 +794,5 @@ input ListingUpdateWithoutUniqueItemInput {
   conduitKey: StringFieldUpdateOperationsInput
   counter: IntFieldUpdateOperationsInput
   signature: StringFieldUpdateOperationsInput
+  totalOriginalConsiderationItems: IntFieldUpdateOperationsInput
 }
