@@ -8,6 +8,8 @@ import { GraphQLISODateTime } from '@nestjs/graphql';
 import { join } from 'path';
 import { PrismaService } from './prisma/prisma.service';
 import { ListingModule } from './listing/listing.module';
+import { ItemModule } from './item/item.module';
+import { UniqueItemModule } from './unique-item/unique-item.module';
 
 @Module({
   imports: [
@@ -15,11 +17,13 @@ import { ListingModule } from './listing/listing.module';
       driver: ApolloDriver,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      //autoSchemaFile: join(process.cwd(), 'src/types/schema.gql'),
+      // autoSchemaFile: join(process.cwd(), 'src/types/schema.gql'),
       typePaths: ['./**/*.gql'],
       // resolvers: { DateTime: GraphQLISODateTime },
     }),
     ListingModule,
+    ItemModule,
+    UniqueItemModule,
   ],
   controllers: [AppController],
   providers: [AppService],

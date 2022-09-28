@@ -16,13 +16,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model UniqueItem {
+  id Int @id @default(autoincrement())
+
+  token      String
+  identifier String
+  listing    Listing @relation(fields: [listingId], references: [id])
+  listingId  Int
+
+  @@unique([token, identifier])
+}
+
 model Listing {
   id            Int                 @id @default(autoincrement())
   offerer       String
   zone          String
   offer         Item[]
   consideration ConsiderationItem[]
-  orderType     Int
+  orderType     OrderType
   startTime     String
   endTime       String
   zoneHash      String
@@ -30,6 +41,7 @@ model Listing {
   conduitKey    String
   counter       Int
   signature     String
+  UniqueItem    UniqueItem[]
 }
 
 model ConsiderationItem {
@@ -45,7 +57,7 @@ model ConsiderationItem {
 model Item {
   id Int @id @default(autoincrement())
 
-  itemType             Int
+  itemType             ItemType
   token                String
   identifierOrCriteria String
   startAmount          String
@@ -53,15 +65,20 @@ model Item {
   Listing              Listing?            @relation(fields: [listingId], references: [id])
   listingId            Int?
   ConsiderationItem    ConsiderationItem[]
-
-  @@unique([token, identifierOrCriteria])
 }
 
-// enum ItemType {
-//   NATIVE
-//   ERC20
-//   ERC721
-//   ERC1155
-//   ERC721_WITH_CRITERIA
-//   ERC1155_WITH_CRITERIA
-// }
+enum ItemType {
+  NATIVE
+  ERC20
+  ERC721
+  ERC1155
+  ERC721_WITH_CRITERIA
+  ERC1155_WITH_CRITERIA
+}
+
+enum OrderType {
+  FULL_OPEN
+  PARTIAL_OPEN
+  FULL_RESTRICTED
+  PARTIAL_RESTRICTED
+}
