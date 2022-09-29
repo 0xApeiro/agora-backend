@@ -32,8 +32,8 @@ type UniqueItem {
   id: ID!
   token: String!
   identifier: String!
-  listing: Listing!
-  listingId: Int!
+  listing: Listing
+  listingId: Int
 }
 
 type ListingCount {
@@ -464,7 +464,7 @@ input UniqueItemScalarWhereInput {
   id: IntFilter
   token: StringFilter
   identifier: StringFilter
-  listingId: IntFilter
+  listingId: IntNullableFilter
 }
 
 input IntFilter {
@@ -523,6 +523,28 @@ input NestedStringFilter {
   not: NestedStringFilter
 }
 
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
 input UniqueItemUpdateManyMutationInput {
   token: StringFieldUpdateOperationsInput
   identifier: StringFieldUpdateOperationsInput
@@ -546,28 +568,6 @@ input ConsiderationItemScalarWhereInput {
   recipient: StringFilter
   listingId: IntNullableFilter
   itemId: IntFilter
-}
-
-input IntNullableFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: NestedIntNullableFilter
-}
-
-input NestedIntNullableFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: NestedIntNullableFilter
 }
 
 input ConsiderationItemUpdateManyMutationInput {
@@ -696,7 +696,7 @@ input ConsiderationItemUpdateManyWithWhereWithoutListingInput {
 input UniqueItemCreateInput {
   token: String!
   identifier: String!
-  listing: ListingCreateNestedOneWithoutUniqueItemInput!
+  listing: ListingCreateNestedOneWithoutUniqueItemInput
 }
 
 input ListingCreateNestedOneWithoutUniqueItemInput {
@@ -729,13 +729,15 @@ input ListingCreateOrConnectWithoutUniqueItemInput {
 input UniqueItemUpdateInput {
   token: StringFieldUpdateOperationsInput
   identifier: StringFieldUpdateOperationsInput
-  listing: ListingUpdateOneRequiredWithoutUniqueItemNestedInput
+  listing: ListingUpdateOneWithoutUniqueItemNestedInput
 }
 
-input ListingUpdateOneRequiredWithoutUniqueItemNestedInput {
+input ListingUpdateOneWithoutUniqueItemNestedInput {
   create: ListingCreateWithoutUniqueItemInput
   connectOrCreate: ListingCreateOrConnectWithoutUniqueItemInput
   upsert: ListingUpsertWithoutUniqueItemInput
+  disconnect: Boolean
+  delete: Boolean
   connect: ListingWhereUniqueInput
   update: ListingUpdateWithoutUniqueItemInput
 }

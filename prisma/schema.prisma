@@ -21,8 +21,8 @@ model UniqueItem {
 
   token      String
   identifier String
-  listing    Listing @relation(fields: [listingId], references: [id])
-  listingId  Int
+  listing    Listing? @relation(fields: [listingId], references: [id])
+  listingId  Int?
 
   @@unique([token, identifier])
 }
