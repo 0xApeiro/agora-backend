@@ -10,7 +10,16 @@ export class UniqueItemService {
     return this.prisma.uniqueItem.findUnique({
       where,
       include: {
-        listing: true,
+        listing: {
+          include: {
+            consideration: {
+              include: {
+                item: true,
+              },
+            },
+            offer: true,
+          },
+        },
       },
     });
   }

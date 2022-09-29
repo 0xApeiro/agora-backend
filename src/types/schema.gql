@@ -17,7 +17,7 @@ type ItemCount {
 
 type Item {
   id: ID!
-  itemType: ItemType!
+  itemType: Int!
   token: String!
   identifierOrCriteria: String!
   startAmount: String!
@@ -26,15 +26,6 @@ type Item {
   listingId: Int
   ConsiderationItem: [ConsiderationItem!]
   _count: ItemCount!
-}
-
-enum ItemType {
-  NATIVE
-  ERC20
-  ERC721
-  ERC1155
-  ERC721_WITH_CRITERIA
-  ERC1155_WITH_CRITERIA
 }
 
 type UniqueItem {
@@ -57,7 +48,7 @@ type Listing {
   zone: String!
   offer: [Item!]
   consideration: [ConsiderationItem!]
-  orderType: OrderType!
+  orderType: Int!
   startTime: String!
   endTime: String!
   zoneHash: String!
@@ -68,13 +59,6 @@ type Listing {
   totalOriginalConsiderationItems: Int!
   UniqueItem: [UniqueItem!]
   _count: ListingCount!
-}
-
-enum OrderType {
-  FULL_OPEN
-  PARTIAL_OPEN
-  FULL_RESTRICTED
-  PARTIAL_RESTRICTED
 }
 
 type Query {
@@ -114,7 +98,7 @@ input ListingCreateInput {
   zone: String!
   offer: ItemCreateNestedManyWithoutListingInput
   consideration: ConsiderationItemCreateNestedManyWithoutListingInput
-  orderType: OrderType!
+  orderType: Int!
   startTime: String!
   endTime: String!
   zoneHash: String!
@@ -134,7 +118,7 @@ input ItemCreateNestedManyWithoutListingInput {
 }
 
 input ItemCreateWithoutListingInput {
-  itemType: ItemType!
+  itemType: Int!
   token: String!
   identifierOrCriteria: String!
   startAmount: String!
@@ -164,7 +148,7 @@ input ListingCreateWithoutConsiderationInput {
   offerer: String!
   zone: String!
   offer: ItemCreateNestedManyWithoutListingInput
-  orderType: OrderType!
+  orderType: Int!
   startTime: String!
   endTime: String!
   zoneHash: String!
@@ -241,7 +225,7 @@ input ItemCreateManyListingInputEnvelope {
 
 input ItemCreateManyListingInput {
   id: Int
-  itemType: ItemType!
+  itemType: Int!
   token: String!
   identifierOrCriteria: String!
   startAmount: String!
@@ -267,7 +251,7 @@ input ItemCreateNestedOneWithoutConsiderationItemInput {
 }
 
 input ItemCreateWithoutConsiderationItemInput {
-  itemType: ItemType!
+  itemType: Int!
   token: String!
   identifierOrCriteria: String!
   startAmount: String!
@@ -285,7 +269,7 @@ input ListingCreateWithoutOfferInput {
   offerer: String!
   zone: String!
   consideration: ConsiderationItemCreateNestedManyWithoutListingInput
-  orderType: OrderType!
+  orderType: Int!
   startTime: String!
   endTime: String!
   zoneHash: String!
@@ -328,7 +312,7 @@ input ListingUpdateInput {
   zone: StringFieldUpdateOperationsInput
   offer: ItemUpdateManyWithoutListingNestedInput
   consideration: ConsiderationItemUpdateManyWithoutListingNestedInput
-  orderType: EnumOrderTypeFieldUpdateOperationsInput
+  orderType: IntFieldUpdateOperationsInput
   startTime: StringFieldUpdateOperationsInput
   endTime: StringFieldUpdateOperationsInput
   zoneHash: StringFieldUpdateOperationsInput
@@ -365,7 +349,7 @@ input ItemUpsertWithWhereUniqueWithoutListingInput {
 }
 
 input ItemUpdateWithoutListingInput {
-  itemType: EnumItemTypeFieldUpdateOperationsInput
+  itemType: IntFieldUpdateOperationsInput
   token: StringFieldUpdateOperationsInput
   identifierOrCriteria: StringFieldUpdateOperationsInput
   startAmount: StringFieldUpdateOperationsInput
@@ -373,8 +357,12 @@ input ItemUpdateWithoutListingInput {
   ConsiderationItem: ConsiderationItemUpdateManyWithoutItemNestedInput
 }
 
-input EnumItemTypeFieldUpdateOperationsInput {
-  set: ItemType
+input IntFieldUpdateOperationsInput {
+  set: Int
+  increment: Int
+  decrement: Int
+  multiply: Int
+  divide: Int
 }
 
 input ConsiderationItemUpdateManyWithoutItemNestedInput {
@@ -421,7 +409,7 @@ input ListingUpdateWithoutConsiderationInput {
   offerer: StringFieldUpdateOperationsInput
   zone: StringFieldUpdateOperationsInput
   offer: ItemUpdateManyWithoutListingNestedInput
-  orderType: EnumOrderTypeFieldUpdateOperationsInput
+  orderType: IntFieldUpdateOperationsInput
   startTime: StringFieldUpdateOperationsInput
   endTime: StringFieldUpdateOperationsInput
   zoneHash: StringFieldUpdateOperationsInput
@@ -431,18 +419,6 @@ input ListingUpdateWithoutConsiderationInput {
   signature: StringFieldUpdateOperationsInput
   totalOriginalConsiderationItems: IntFieldUpdateOperationsInput
   UniqueItem: UniqueItemUpdateManyWithoutListingNestedInput
-}
-
-input EnumOrderTypeFieldUpdateOperationsInput {
-  set: OrderType
-}
-
-input IntFieldUpdateOperationsInput {
-  set: Int
-  increment: Int
-  decrement: Int
-  multiply: Int
-  divide: Int
 }
 
 input UniqueItemUpdateManyWithoutListingNestedInput {
@@ -612,7 +588,7 @@ input ItemScalarWhereInput {
   OR: [ItemScalarWhereInput!]
   NOT: [ItemScalarWhereInput!]
   id: IntFilter
-  itemType: EnumItemTypeFilter
+  itemType: IntFilter
   token: StringFilter
   identifierOrCriteria: StringFilter
   startAmount: StringFilter
@@ -620,22 +596,8 @@ input ItemScalarWhereInput {
   listingId: IntNullableFilter
 }
 
-input EnumItemTypeFilter {
-  equals: ItemType
-  in: [ItemType!]
-  notIn: [ItemType!]
-  not: NestedEnumItemTypeFilter
-}
-
-input NestedEnumItemTypeFilter {
-  equals: ItemType
-  in: [ItemType!]
-  notIn: [ItemType!]
-  not: NestedEnumItemTypeFilter
-}
-
 input ItemUpdateManyMutationInput {
-  itemType: EnumItemTypeFieldUpdateOperationsInput
+  itemType: IntFieldUpdateOperationsInput
   token: StringFieldUpdateOperationsInput
   identifierOrCriteria: StringFieldUpdateOperationsInput
   startAmount: StringFieldUpdateOperationsInput
@@ -681,7 +643,7 @@ input ItemUpsertWithoutConsiderationItemInput {
 }
 
 input ItemUpdateWithoutConsiderationItemInput {
-  itemType: EnumItemTypeFieldUpdateOperationsInput
+  itemType: IntFieldUpdateOperationsInput
   token: StringFieldUpdateOperationsInput
   identifierOrCriteria: StringFieldUpdateOperationsInput
   startAmount: StringFieldUpdateOperationsInput
@@ -708,7 +670,7 @@ input ListingUpdateWithoutOfferInput {
   offerer: StringFieldUpdateOperationsInput
   zone: StringFieldUpdateOperationsInput
   consideration: ConsiderationItemUpdateManyWithoutListingNestedInput
-  orderType: EnumOrderTypeFieldUpdateOperationsInput
+  orderType: IntFieldUpdateOperationsInput
   startTime: StringFieldUpdateOperationsInput
   endTime: StringFieldUpdateOperationsInput
   zoneHash: StringFieldUpdateOperationsInput
@@ -747,7 +709,7 @@ input ListingCreateWithoutUniqueItemInput {
   zone: String!
   offer: ItemCreateNestedManyWithoutListingInput
   consideration: ConsiderationItemCreateNestedManyWithoutListingInput
-  orderType: OrderType!
+  orderType: Int!
   startTime: String!
   endTime: String!
   zoneHash: String!
@@ -787,7 +749,7 @@ input ListingUpdateWithoutUniqueItemInput {
   zone: StringFieldUpdateOperationsInput
   offer: ItemUpdateManyWithoutListingNestedInput
   consideration: ConsiderationItemUpdateManyWithoutListingNestedInput
-  orderType: EnumOrderTypeFieldUpdateOperationsInput
+  orderType: IntFieldUpdateOperationsInput
   startTime: StringFieldUpdateOperationsInput
   endTime: StringFieldUpdateOperationsInput
   zoneHash: StringFieldUpdateOperationsInput

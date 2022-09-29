@@ -33,7 +33,7 @@ model Listing {
   zone                            String
   offer                           Item[]
   consideration                   ConsiderationItem[]
-  orderType                       OrderType
+  orderType                       Int
   startTime                       String
   endTime                         String
   zoneHash                        String
@@ -58,7 +58,7 @@ model ConsiderationItem {
 model Item {
   id Int @id @default(autoincrement())
 
-  itemType             ItemType
+  itemType             Int
   token                String
   identifierOrCriteria String
   startAmount          String
@@ -66,20 +66,4 @@ model Item {
   Listing              Listing?            @relation(fields: [listingId], references: [id])
   listingId            Int?
   ConsiderationItem    ConsiderationItem[]
-}
-
-enum ItemType {
-  NATIVE
-  ERC20
-  ERC721
-  ERC1155
-  ERC721_WITH_CRITERIA
-  ERC1155_WITH_CRITERIA
-}
-
-enum OrderType {
-  FULL_OPEN
-  PARTIAL_OPEN
-  FULL_RESTRICTED
-  PARTIAL_RESTRICTED
 }
