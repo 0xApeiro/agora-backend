@@ -22,4 +22,12 @@ export class UniqueItemResolver {
   ) {
     return this.uniqueItemService.upsert(where, create, update);
   }
+
+  @Mutation(() => UniqueItem)
+  updateUniqueItem(
+    @Args('where') where: UniqueItemWhereUniqueInput,
+    @Args('update') data: UniqueItemUpdateInput,
+  ) {
+    return this.uniqueItemService.update(where, data);
+  }
 }

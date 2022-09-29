@@ -35,4 +35,14 @@ export class UniqueItemService {
       update,
     });
   }
+
+  update(
+    where: Prisma.UniqueItemWhereUniqueInput,
+    data: Prisma.UniqueItemUpdateInput,
+  ) {
+    return this.prisma.uniqueItem.update({
+      where,
+      data,
+    });
+  }
 }

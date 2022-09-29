@@ -91,6 +91,7 @@ type Mutation {
   updateListing(where: ListingWhereUniqueInput!, data: ListingUpdateInput!): Listing!
   removeListing(where: ListingWhereUniqueInput!): Listing!
   upsertUniqueItem(where: UniqueItemWhereUniqueInput!, create: UniqueItemCreateInput!, update: UniqueItemUpdateInput!): UniqueItem!
+  updateUniqueItem(where: UniqueItemWhereUniqueInput!, update: UniqueItemUpdateInput!): UniqueItem!
 }
 
 input ListingCreateInput {
