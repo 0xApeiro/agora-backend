@@ -81,6 +81,7 @@ type Query {
   listings: [Listing!]!
   listing(where: ListingWhereUniqueInput!): Listing!
   item(where: ItemWhereUniqueInput!): Item!
+  uniqueItem(where: UniqueItemWhereUniqueInput!): UniqueItem!
 }
 
 input ListingWhereUniqueInput {
@@ -89,6 +90,16 @@ input ListingWhereUniqueInput {
 
 input ItemWhereUniqueInput {
   id: Int
+}
+
+input UniqueItemWhereUniqueInput {
+  id: Int
+  token_identifier: UniqueItemTokenIdentifierCompoundUniqueInput
+}
+
+input UniqueItemTokenIdentifierCompoundUniqueInput {
+  token: String!
+  identifier: String!
 }
 
 type Mutation {
@@ -180,16 +191,6 @@ input UniqueItemCreateWithoutListingInput {
 input UniqueItemCreateOrConnectWithoutListingInput {
   where: UniqueItemWhereUniqueInput!
   create: UniqueItemCreateWithoutListingInput!
-}
-
-input UniqueItemWhereUniqueInput {
-  id: Int
-  token_identifier: UniqueItemTokenIdentifierCompoundUniqueInput
-}
-
-input UniqueItemTokenIdentifierCompoundUniqueInput {
-  token: String!
-  identifier: String!
 }
 
 input UniqueItemCreateManyListingInputEnvelope {

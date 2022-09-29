@@ -9,6 +9,11 @@ import { UniqueItemService } from './unique-item.service';
 export class UniqueItemResolver {
   constructor(private readonly uniqueItemService: UniqueItemService) {}
 
+  @Query(() => UniqueItem, { name: 'uniqueItem' })
+  findOne(@Args('where') where: UniqueItemWhereUniqueInput) {
+    return this.uniqueItemService.findOne(where);
+  }
+
   @Mutation(() => UniqueItem)
   upsertUniqueItem(
     @Args('where') where: UniqueItemWhereUniqueInput,

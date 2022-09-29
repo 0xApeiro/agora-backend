@@ -6,11 +6,22 @@ import { PrismaService } from '../prisma/prisma.service';
 export class UniqueItemService {
   constructor(private prisma: PrismaService) {}
 
+  findOne(where: Prisma.UniqueItemWhereUniqueInput) {
+    return this.prisma.uniqueItem.findUnique({ where });
+  }
+
   upsert(
     where: Prisma.UniqueItemWhereUniqueInput,
     create: Prisma.UniqueItemCreateInput,
     update: Prisma.UniqueItemUpdateInput,
   ) {
-    return this.prisma.uniqueItem.upsert({ where, create, update });
+    return this.prisma.uniqueItem.upsert({
+      where,
+      create,
+      update,
+      include: {
+        listing: true,
+      },
+    });
   }
 }
