@@ -17,7 +17,7 @@ import { UniqueItemModule } from './unique-item/unique-item.module';
       driver: ApolloDriver,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      // autoSchemaFile: join(process.cwd(), 'src/types/schema.gql'),
+      //  autoSchemaFile: join(process.cwd(), 'src/types/schema.gql'),
       typePaths: ['./**/*.gql'],
       // resolvers: { DateTime: GraphQLISODateTime },
     }),

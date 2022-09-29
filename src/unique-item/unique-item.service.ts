@@ -7,7 +7,12 @@ export class UniqueItemService {
   constructor(private prisma: PrismaService) {}
 
   findOne(where: Prisma.UniqueItemWhereUniqueInput) {
-    return this.prisma.uniqueItem.findUnique({ where });
+    return this.prisma.uniqueItem.findUnique({
+      where,
+      include: {
+        listing: true,
+      },
+    });
   }
 
   upsert(
@@ -19,9 +24,6 @@ export class UniqueItemService {
       where,
       create,
       update,
-      include: {
-        listing: true,
-      },
     });
   }
 }
