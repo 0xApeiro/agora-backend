@@ -3,7 +3,7 @@ import { CollectionCreateInput } from '../@generated/collection/collection-creat
 import { CollectionUpdateInput } from '../@generated/collection/collection-update.input';
 import { CollectionWhereUniqueInput } from '../@generated/collection/collection-where-unique.input';
 import { CollectionsService } from './collections.service';
-import { Collection } from './entities/collection.entity';
+import { Collection } from '../@generated/collection/collection.model';
 
 @Resolver(() => Collection)
 export class CollectionsResolver {

@@ -1,5 +1,4 @@
 org: cleanreptile
-console: true
 service: prisma-aws-lambda-agora
 
 package:
