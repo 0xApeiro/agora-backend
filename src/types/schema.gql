@@ -61,11 +61,18 @@ type Listing {
   _count: ListingCount!
 }
 
+type Collection {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   listings: [Listing!]!
   listing(where: ListingWhereUniqueInput!): Listing!
   item(where: ItemWhereUniqueInput!): Item!
   uniqueItem(where: UniqueItemWhereUniqueInput!): UniqueItem!
+  collections: [Collection!]!
+  collection(where: CollectionWhereUniqueInput!): Collection!
 }
 
 input ListingWhereUniqueInput {
@@ -86,12 +93,20 @@ input UniqueItemTokenIdentifierCompoundUniqueInput {
   identifier: String!
 }
 
+input CollectionWhereUniqueInput {
+  id: Int
+  token: String
+}
+
 type Mutation {
   createListing(data: ListingCreateInput!): Listing!
   updateListing(where: ListingWhereUniqueInput!, data: ListingUpdateInput!): Listing!
   removeListing(where: ListingWhereUniqueInput!): Listing!
   upsertUniqueItem(where: UniqueItemWhereUniqueInput!, create: UniqueItemCreateInput!, update: UniqueItemUpdateInput!): UniqueItem!
   updateUniqueItem(where: UniqueItemWhereUniqueInput!, update: UniqueItemUpdateInput!): UniqueItem!
+  createCollection(data: CollectionCreateInput!): Collection!
+  updateCollection(where: CollectionWhereUniqueInput!, data: CollectionUpdateInput!): Collection!
+  removeCollection(where: CollectionWhereUniqueInput!): Collection!
 }
 
 input ListingCreateInput {
@@ -761,4 +776,33 @@ input ListingUpdateWithoutUniqueItemInput {
   counter: IntFieldUpdateOperationsInput
   signature: StringFieldUpdateOperationsInput
   totalOriginalConsiderationItems: IntFieldUpdateOperationsInput
+}
+
+input CollectionCreateInput {
+  name: String!
+  description: String!
+  token: String!
+  bannerImage: String!
+  profileImage: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input CollectionUpdateInput {
+  name: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  token: StringFieldUpdateOperationsInput
+  bannerImage: StringFieldUpdateOperationsInput
+  profileImage: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
 }

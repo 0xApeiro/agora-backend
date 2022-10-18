@@ -1,26 +1,31 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCollectionInput } from './dto/create-collection.input';
-import { UpdateCollectionInput } from './dto/update-collection.input';
+import { Prisma } from '@prisma/client';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class CollectionsService {
-  create(createCollectionInput: CreateCollectionInput) {
-    return 'This action adds a new collection';
+  constructor(private prisma: PrismaService) {}
+
+  create(data: Prisma.CollectionCreateInput) {
+    return this.prisma.collection.create({ data });
   }
 
   findAll() {
-    return `This action returns all collections`;
+    return this.prisma.collection.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} collection`;
+  findOne(where: Prisma.CollectionWhereUniqueInput) {
+    return this.prisma.collection.findUnique({ where });
   }
 
-  update(id: number, updateCollectionInput: UpdateCollectionInput) {
-    return `This action updates a #${id} collection`;
+  update(
+    where: Prisma.CollectionWhereUniqueInput,
+    data: Prisma.CollectionUpdateInput,
+  ) {
+    return this.prisma.collection.update({ where, data });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} collection`;
+  remove(where: Prisma.CollectionWhereUniqueInput) {
+    return this.prisma.collection.delete({ where });
   }
 }

@@ -1,16 +1,17 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { CollectionCreateInput } from '../@generated/collection/collection-create.input';
+import { CollectionUpdateInput } from '../@generated/collection/collection-update.input';
+import { CollectionWhereUniqueInput } from '../@generated/collection/collection-where-unique.input';
 import { CollectionsService } from './collections.service';
 import { Collection } from './entities/collection.entity';
-import { CreateCollectionInput } from './dto/create-collection.input';
-import { UpdateCollectionInput } from './dto/update-collection.input';
 
 @Resolver(() => Collection)
 export class CollectionsResolver {
   constructor(private readonly collectionsService: CollectionsService) {}
 
   @Mutation(() => Collection)
-  createCollection(@Args('createCollectionInput') createCollectionInput: CreateCollectionInput) {
-    return this.collectionsService.create(createCollectionInput);
+  createCollection(@Args('data') data: CollectionCreateInput) {
+    return this.collectionsService.create(data);
   }
 
   @Query(() => [Collection], { name: 'collections' })
@@ -19,17 +20,20 @@ export class CollectionsResolver {
   }
 
   @Query(() => Collection, { name: 'collection' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.collectionsService.findOne(id);
+  findOne(@Args('where') where: CollectionWhereUniqueInput) {
+    return this.collectionsService.findOne(where);
   }
 
   @Mutation(() => Collection)
-  updateCollection(@Args('updateCollectionInput') updateCollectionInput: UpdateCollectionInput) {
-    return this.collectionsService.update(updateCollectionInput.id, updateCollectionInput);
+  updateCollection(
+    @Args('where') where: CollectionWhereUniqueInput,
+    @Args('data') data: CollectionUpdateInput,
+  ) {
+    return this.collectionsService.update(where, data);
   }
 
   @Mutation(() => Collection)
-  removeCollection(@Args('id', { type: () => Int }) id: number) {
-    return this.collectionsService.remove(id);
+  removeCollection(@Args('where') where: CollectionWhereUniqueInput) {
+    return this.collectionsService.remove(where);
   }
 }
