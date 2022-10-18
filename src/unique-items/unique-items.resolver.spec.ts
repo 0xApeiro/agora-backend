@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UniqueItemResolver } from './unique-item.resolver';
-import { UniqueItemService } from './unique-item.service';
+import { UniqueItemResolver } from './unique-items.resolver';
+import { UniqueItemService } from './unique-items.service';
 
 describe('UniqueItemResolver', () => {
   let resolver: UniqueItemResolver;

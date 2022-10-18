@@ -3,7 +3,7 @@ import { ListingCreateInput } from '../@generated/listing/listing-create.input';
 import { ListingUpdateInput } from '../@generated/listing/listing-update.input';
 import { ListingWhereUniqueInput } from '../@generated/listing/listing-where-unique.input';
 import { Listing } from '../@generated/listing/listing.model';
-import { ListingService } from './listing.service';
+import { ListingService } from './listings.service';
 
 @Resolver(() => Listing)
 export class ListingResolver {

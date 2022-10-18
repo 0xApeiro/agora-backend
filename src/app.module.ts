@@ -8,8 +8,9 @@ import { GraphQLISODateTime } from '@nestjs/graphql';
 import { join } from 'path';
 import { PrismaService } from './prisma/prisma.service';
 import { ListingModule } from './listing/listing.module';
-import { ItemModule } from './item/item.module';
+import { ItemModule } from './items/item.module';
 import { UniqueItemModule } from './unique-item/unique-item.module';
+import { CollectionsModule } from './collections/collections.module';
 
 @Module({
   imports: [
@@ -20,10 +21,12 @@ import { UniqueItemModule } from './unique-item/unique-item.module';
       // autoSchemaFile: join(process.cwd(), 'src/types/schema.gql'),
       typePaths: ['./**/*.gql'],
       // resolvers: { DateTime: GraphQLISODateTime },
+      uploads: false,
     }),
     ListingModule,
     ItemModule,
     UniqueItemModule,
+    CollectionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

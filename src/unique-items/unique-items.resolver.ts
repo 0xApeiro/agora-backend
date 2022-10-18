@@ -3,7 +3,7 @@ import { UniqueItemCreateInput } from '../@generated/unique-item/unique-item-cre
 import { UniqueItemUpdateInput } from '../@generated/unique-item/unique-item-update.input';
 import { UniqueItemWhereUniqueInput } from '../@generated/unique-item/unique-item-where-unique.input';
 import { UniqueItem } from '../@generated/unique-item/unique-item.model';
-import { UniqueItemService } from './unique-item.service';
+import { UniqueItemService } from './unique-items.service';
 
 @Resolver(() => UniqueItem)
 export class UniqueItemResolver {

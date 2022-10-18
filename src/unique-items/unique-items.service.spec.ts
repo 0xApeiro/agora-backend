@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UniqueItemService } from './unique-item.service';
+import { UniqueItemService } from './unique-items.service';
 
 describe('UniqueItemService', () => {
   let service: UniqueItemService;

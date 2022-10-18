@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { UniqueItemService } from './unique-item.service';
-import { UniqueItemResolver } from './unique-item.resolver';
+import { UniqueItemService } from './unique-items.service';
+import { UniqueItemResolver } from './unique-items.resolver';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Module({
