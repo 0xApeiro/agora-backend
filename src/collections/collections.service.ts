@@ -14,6 +14,10 @@ export class CollectionsService {
     return this.prisma.collection.findMany();
   }
 
+  findMany(where: Prisma.CollectionWhereInput) {
+    return this.prisma.collection.findMany({ where });
+  }
+
   findOne(where: Prisma.CollectionWhereUniqueInput) {
     return this.prisma.collection.findUnique({ where });
   }
