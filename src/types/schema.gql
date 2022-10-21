@@ -82,7 +82,7 @@ type Query {
   listing(where: ListingWhereUniqueInput!): Listing!
   item(where: ItemWhereUniqueInput!): Item!
   uniqueItem(where: UniqueItemWhereUniqueInput!): UniqueItem!
-  collections: [Collection!]!
+  collections(where: CollectionWhereInput!): [Collection!]!
   collection(where: CollectionWhereUniqueInput!): Collection!
 }
 
@@ -102,6 +102,98 @@ input UniqueItemWhereUniqueInput {
 input UniqueItemTokenIdentifierCompoundUniqueInput {
   token: String!
   identifier: String!
+}
+
+input CollectionWhereInput {
+  AND: [CollectionWhereInput!]
+  OR: [CollectionWhereInput!]
+  NOT: [CollectionWhereInput!]
+  id: IntFilter
+  name: StringFilter
+  description: StringFilter
+  token: StringFilter
+  bannerImage: StringFilter
+  profileImage: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringFilter
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
 }
 
 input CollectionWhereUniqueInput {
@@ -491,62 +583,6 @@ input UniqueItemScalarWhereInput {
   token: StringFilter
   identifier: StringFilter
   listingId: IntNullableFilter
-}
-
-input IntFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: NestedIntFilter
-}
-
-input NestedIntFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: NestedIntFilter
-}
-
-input StringFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  mode: QueryMode
-  not: NestedStringFilter
-}
-
-enum QueryMode {
-  default
-  insensitive
-}
-
-input NestedStringFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringFilter
 }
 
 input IntNullableFilter {
