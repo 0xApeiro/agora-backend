@@ -16,7 +16,7 @@ export class CollectionsResolver {
   }
 
   @Query(() => [Collection], { name: 'collections' })
-  findAll(@Args('where') where: CollectionWhereInput) {
+  findAll(@Args('where', { nullable: true }) where: CollectionWhereInput) {
     return this.collectionsService.findAll(where);
   }
 

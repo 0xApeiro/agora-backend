@@ -18,7 +18,7 @@ import { CollectionsModule } from './collections/collections.module';
       driver: ApolloDriver,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      autoSchemaFile: join(process.cwd(), 'src/types/schema.gql'),
+      // autoSchemaFile: join(process.cwd(), 'src/types/schema.gql'),
       typePaths: ['./**/*.gql'],
       // resolvers: { DateTime: GraphQLISODateTime },
     }),

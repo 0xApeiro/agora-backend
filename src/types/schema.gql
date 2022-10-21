@@ -82,7 +82,7 @@ type Query {
   listing(where: ListingWhereUniqueInput!): Listing!
   item(where: ItemWhereUniqueInput!): Item!
   uniqueItem(where: UniqueItemWhereUniqueInput!): UniqueItem!
-  collections(where: CollectionWhereInput!): [Collection!]!
+  collections(where: CollectionWhereInput): [Collection!]!
   collection(where: CollectionWhereUniqueInput!): Collection!
 }
 
