@@ -10,8 +10,8 @@ export class CollectionsService {
     return this.prisma.collection.create({ data });
   }
 
-  findAll() {
-    return this.prisma.collection.findMany();
+  findAll(where: Prisma.CollectionWhereInput) {
+    return this.prisma.collection.findMany({ where });
   }
 
   findMany(where: Prisma.CollectionWhereInput) {

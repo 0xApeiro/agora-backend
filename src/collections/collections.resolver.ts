@@ -16,13 +16,8 @@ export class CollectionsResolver {
   }
 
   @Query(() => [Collection], { name: 'collections' })
-  findAll() {
-    return this.collectionsService.findAll();
-  }
-
-  @Query(() => [Collection], { name: 'collections' })
-  findMany(@Args('where') where: CollectionWhereInput) {
-    return this.collectionsService.findMany(where);
+  findAll(@Args('where') where: CollectionWhereInput) {
+    return this.collectionsService.findAll(where);
   }
 
   @Query(() => Collection, { name: 'collection' })
