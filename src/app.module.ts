@@ -11,6 +11,7 @@ import { ListingModule } from './listings/listings.module';
 import { ItemModule } from './items/item.module';
 import { UniqueItemModule } from './unique-items/unique-items.module';
 import { CollectionsModule } from './collections/collections.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { CollectionsModule } from './collections/collections.module';
     ItemModule,
     UniqueItemModule,
     CollectionsModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

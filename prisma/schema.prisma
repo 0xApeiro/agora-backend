@@ -23,8 +23,22 @@ model Collection {
   token        String   @unique
   bannerImage  String
   profileImage String
+  user         User     @relation(fields: [userAddress], references: [address])
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  userAddress  String
+}
+
+model User {
+  id           Int          @id @default(autoincrement())
+  address      String       @unique
+  name         String?      @unique
+  bio          String?
+  bannerImage  String?
+  profileImage String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  Collection   Collection[]
 }
 
 model UniqueItem {
