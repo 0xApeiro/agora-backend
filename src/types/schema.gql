@@ -61,6 +61,28 @@ type Listing {
   _count: ListingCount!
 }
 
+type UserCount {
+  Collection: Int!
+}
+
+type User {
+  id: ID!
+  address: String!
+  name: String
+  bio: String
+  bannerImage: String
+  profileImage: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  Collection: [Collection!]
+  _count: UserCount!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Collection {
   id: ID!
   name: String!
@@ -68,14 +90,11 @@ type Collection {
   token: String!
   bannerImage: String!
   profileImage: String!
+  user: User!
   createdAt: DateTime!
   updatedAt: DateTime!
+  userAddress: String!
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type Query {
   listings: [Listing!]!
@@ -84,6 +103,8 @@ type Query {
   uniqueItem(where: UniqueItemWhereUniqueInput!): UniqueItem!
   collections(where: CollectionWhereInput): [Collection!]!
   collection(where: CollectionWhereUniqueInput!): Collection!
+  users: [User!]!
+  user(where: UserWhereUniqueInput!): User!
 }
 
 input ListingWhereUniqueInput {
@@ -114,8 +135,10 @@ input CollectionWhereInput {
   token: StringFilter
   bannerImage: StringFilter
   profileImage: StringFilter
+  user: UserRelationFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
+  userAddress: StringFilter
 }
 
 input IntFilter {
@@ -174,6 +197,55 @@ input NestedStringFilter {
   not: NestedStringFilter
 }
 
+input UserRelationFilter {
+  is: UserWhereInput
+  isNot: UserWhereInput
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  id: IntFilter
+  address: StringFilter
+  name: StringNullableFilter
+  bio: StringNullableFilter
+  bannerImage: StringNullableFilter
+  profileImage: StringNullableFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  Collection: CollectionListRelationFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringNullableFilter
+}
+
+input NestedStringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
 input DateTimeFilter {
   equals: DateTime
   in: [DateTime!]
@@ -196,9 +268,21 @@ input NestedDateTimeFilter {
   not: NestedDateTimeFilter
 }
 
+input CollectionListRelationFilter {
+  every: CollectionWhereInput
+  some: CollectionWhereInput
+  none: CollectionWhereInput
+}
+
 input CollectionWhereUniqueInput {
   id: Int
   token: String
+}
+
+input UserWhereUniqueInput {
+  id: Int
+  address: String
+  name: String
 }
 
 type Mutation {
@@ -210,6 +294,9 @@ type Mutation {
   createCollection(data: CollectionCreateInput!): Collection!
   updateCollection(where: CollectionWhereUniqueInput!, data: CollectionUpdateInput!): Collection!
   removeCollection(where: CollectionWhereUniqueInput!): Collection!
+  createUser(data: UserCreateInput!): User!
+  updateUser(where: UserWhereUniqueInput!, data: UserUpdateInput!): User!
+  removeUser(where: UserWhereUniqueInput!): User!
 }
 
 input ListingCreateInput {
@@ -831,11 +918,155 @@ input CollectionCreateInput {
   token: String!
   bannerImage: String!
   profileImage: String!
+  user: UserCreateNestedOneWithoutCollectionInput!
   createdAt: DateTime
   updatedAt: DateTime
 }
 
+input UserCreateNestedOneWithoutCollectionInput {
+  create: UserCreateWithoutCollectionInput
+  connectOrCreate: UserCreateOrConnectWithoutCollectionInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutCollectionInput {
+  address: String!
+  name: String
+  bio: String
+  bannerImage: String
+  profileImage: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input UserCreateOrConnectWithoutCollectionInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutCollectionInput!
+}
+
 input CollectionUpdateInput {
+  name: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  token: StringFieldUpdateOperationsInput
+  bannerImage: StringFieldUpdateOperationsInput
+  profileImage: StringFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutCollectionNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateOneRequiredWithoutCollectionNestedInput {
+  create: UserCreateWithoutCollectionInput
+  connectOrCreate: UserCreateOrConnectWithoutCollectionInput
+  upsert: UserUpsertWithoutCollectionInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutCollectionInput
+}
+
+input UserUpsertWithoutCollectionInput {
+  update: UserUpdateWithoutCollectionInput!
+  create: UserCreateWithoutCollectionInput!
+}
+
+input UserUpdateWithoutCollectionInput {
+  address: StringFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  bio: NullableStringFieldUpdateOperationsInput
+  bannerImage: NullableStringFieldUpdateOperationsInput
+  profileImage: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input UserCreateInput {
+  address: String!
+  name: String
+  bio: String
+  bannerImage: String
+  profileImage: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  Collection: CollectionCreateNestedManyWithoutUserInput
+}
+
+input CollectionCreateNestedManyWithoutUserInput {
+  create: [CollectionCreateWithoutUserInput!]
+  connectOrCreate: [CollectionCreateOrConnectWithoutUserInput!]
+  createMany: CollectionCreateManyUserInputEnvelope
+  connect: [CollectionWhereUniqueInput!]
+}
+
+input CollectionCreateWithoutUserInput {
+  name: String!
+  description: String!
+  token: String!
+  bannerImage: String!
+  profileImage: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input CollectionCreateOrConnectWithoutUserInput {
+  where: CollectionWhereUniqueInput!
+  create: CollectionCreateWithoutUserInput!
+}
+
+input CollectionCreateManyUserInputEnvelope {
+  data: [CollectionCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input CollectionCreateManyUserInput {
+  id: Int
+  name: String!
+  description: String!
+  token: String!
+  bannerImage: String!
+  profileImage: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input UserUpdateInput {
+  address: StringFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  bio: NullableStringFieldUpdateOperationsInput
+  bannerImage: NullableStringFieldUpdateOperationsInput
+  profileImage: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  Collection: CollectionUpdateManyWithoutUserNestedInput
+}
+
+input CollectionUpdateManyWithoutUserNestedInput {
+  create: [CollectionCreateWithoutUserInput!]
+  connectOrCreate: [CollectionCreateOrConnectWithoutUserInput!]
+  upsert: [CollectionUpsertWithWhereUniqueWithoutUserInput!]
+  createMany: CollectionCreateManyUserInputEnvelope
+  set: [CollectionWhereUniqueInput!]
+  disconnect: [CollectionWhereUniqueInput!]
+  delete: [CollectionWhereUniqueInput!]
+  connect: [CollectionWhereUniqueInput!]
+  update: [CollectionUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [CollectionUpdateManyWithWhereWithoutUserInput!]
+  deleteMany: [CollectionScalarWhereInput!]
+}
+
+input CollectionUpsertWithWhereUniqueWithoutUserInput {
+  where: CollectionWhereUniqueInput!
+  update: CollectionUpdateWithoutUserInput!
+  create: CollectionCreateWithoutUserInput!
+}
+
+input CollectionUpdateWithoutUserInput {
   name: StringFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   token: StringFieldUpdateOperationsInput
@@ -845,6 +1076,37 @@ input CollectionUpdateInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input DateTimeFieldUpdateOperationsInput {
-  set: DateTime
+input CollectionUpdateWithWhereUniqueWithoutUserInput {
+  where: CollectionWhereUniqueInput!
+  data: CollectionUpdateWithoutUserInput!
+}
+
+input CollectionUpdateManyWithWhereWithoutUserInput {
+  where: CollectionScalarWhereInput!
+  data: CollectionUpdateManyMutationInput!
+}
+
+input CollectionScalarWhereInput {
+  AND: [CollectionScalarWhereInput!]
+  OR: [CollectionScalarWhereInput!]
+  NOT: [CollectionScalarWhereInput!]
+  id: IntFilter
+  name: StringFilter
+  description: StringFilter
+  token: StringFilter
+  bannerImage: StringFilter
+  profileImage: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  userAddress: StringFilter
+}
+
+input CollectionUpdateManyMutationInput {
+  name: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  token: StringFieldUpdateOperationsInput
+  bannerImage: StringFieldUpdateOperationsInput
+  profileImage: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
