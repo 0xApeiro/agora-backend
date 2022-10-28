@@ -20,5 +20,5 @@
     "esModuleInterop": true
   },
   "include": ["src/**/*", "prisma/seed.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
