@@ -21,6 +21,12 @@ provider:
   name: aws
   region: us-east-1
   runtime: nodejs16.x
+  vpc:
+    securityGroupIds:
+      - sg-05be0d8263780e3d7
+    subnetIds:
+      - subnet-0766ec65aad97f00d
+      - subnet-01a9e5e9b35fffbce
 
 functions:
   main:
