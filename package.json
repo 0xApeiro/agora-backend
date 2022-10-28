@@ -8,6 +8,10 @@
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
   },
+  "engines": {
+    "node": "14.15.4",
+    "npm": "6.14.10"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
