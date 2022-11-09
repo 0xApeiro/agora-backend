@@ -4,6 +4,9 @@ const prisma = new PrismaClient();
 
 async function main() {
   await prisma.collection.deleteMany();
+  await prisma.user.deleteMany();
+  await prisma.listing.deleteMany();
+
   await prisma.collection.create({
     data: {
       name: 'Findenza',
@@ -46,18 +49,18 @@ async function main() {
     },
   });
 
-  await prisma.user.update({
-    where: {
-      address: '0x79092A805f1cf9B0F5bE3c5A296De6e51c1DEd34'.toLowerCase(),
-    },
-    data: {
-      name: 'zkSoju',
-      address: '0x79092A805f1cf9B0F5bE3c5A296De6e51c1DEd34'.toLowerCase(),
-      bio: "I'm a full stack developer and I love to create generative art.",
-      profileImage: 'https://i.imgur.com/4ZQZ1Zu.png',
-      bannerImage: 'https://i.imgur.com/4ZQZ1Zu.png',
-    },
-  });
+  // await prisma.user.update({
+  //   where: {
+  //     address: '0x79092A805f1cf9B0F5bE3c5A296De6e51c1DEd34'.toLowerCase(),
+  //   },
+  //   data: {
+  //     name: 'zkSoju',
+  //     address: '0x79092A805f1cf9B0F5bE3c5A296De6e51c1DEd34'.toLowerCase(),
+  //     bio: "I'm a full stack developer and I love to create generative art.",
+  //     profileImage: 'https://i.imgur.com/4ZQZ1Zu.png',
+  //     bannerImage: 'https://i.imgur.com/4ZQZ1Zu.png',
+  //   },
+  // });
 }
 
 main()
